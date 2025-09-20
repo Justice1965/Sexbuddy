@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, render_template_string, request, redirect, url_for, flash, session
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -22,7 +22,31 @@ def get_db_connection():
 
 @app.route("/")
 def index():
-    return redirect(url_for("register"))
+    html = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sexbuddy</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    </head>
+    <body class="bg-light text-center py-5">
+
+        <div class="container">
+            <h1 class="display-4 text-primary">Welcome to Sexbuddy 🚀</h1>
+            <p class="lead">Your Flask app is running successfully on Render.</p>
+
+            <div class="mt-4">
+                <a href="{{ url_for('register') }}" class="btn btn-success btn-lg mx-2">Register</a>
+                <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg mx-2">Login</a>
+            </div>
+        </div>
+
+    </body>
+    </html>
+    """
+    return render_template_string(html)
 
 
 @app.route("/register", methods=["GET", "POST"])
