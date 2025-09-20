@@ -1,0 +1,6 @@
+:loop
+echo Starting quick Cloudflare Tunnel...
+"C:\Users\Justice\.cloudflared\cloudflared.exe" tunnel --url http://127.0.0.1:8000
+echo Tunnel stopped, restarting in 5 seconds...
+timeout /t 5
+goto loop
