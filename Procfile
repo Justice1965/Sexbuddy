@@ -1,1 +1,1 @@
-web: gunicorn render_app.script:app
+web: waitress-serve --port=$PORT script:app
